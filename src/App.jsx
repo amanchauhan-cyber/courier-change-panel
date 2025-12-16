@@ -1,25 +1,23 @@
-function App() {
+import { useState } from 'react'
+import axios from 'axios'
+
+export default function App() {
+  const [result, setResult] = useState('')
+
+  const callApi = async () => {
+    try {
+      const res = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
+      setResult(JSON.stringify(res.data, null, 2))
+    } catch (e) {
+      setResult('API error')
+    }
+  }
+
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+    <div style={{ padding: 20 }}>
       <h1>Courier Change Panel</h1>
-
-      <p>This is a frontend-only hosted app on Vercel.</p>
-
-      <button
-        onClick={() => alert('API call will go here')}
-        style={{
-          padding: '10px 16px',
-          borderRadius: '6px',
-          border: 'none',
-          cursor: 'pointer',
-          background: '#2563eb',
-          color: 'white'
-        }}
-      >
-        Test Button
-      </button>
+      <button onClick={callApi}>Test API</button>
+      <pre>{result}</pre>
     </div>
-  );
+  )
 }
-
-export default App;
