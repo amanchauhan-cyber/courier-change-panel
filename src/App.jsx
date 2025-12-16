@@ -2,22 +2,22 @@ import { useState } from 'react'
 import axios from 'axios'
 
 export default function App() {
-  const [result, setResult] = useState('')
+  const [output, setOutput] = useState('')
 
-  const callApi = async () => {
+  const hitApi = async () => {
     try {
       const res = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
-      setResult(JSON.stringify(res.data, null, 2))
-    } catch (e) {
-      setResult('API error')
+      setOutput(JSON.stringify(res.data, null, 2))
+    } catch (err) {
+      setOutput('API failed')
     }
   }
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Courier Change Panel</h1>
-      <button onClick={callApi}>Test API</button>
-      <pre>{result}</pre>
+      <h2>Courier Change Panel</h2>
+      <button onClick={hitApi}>Test API</button>
+      <pre>{output}</pre>
     </div>
   )
 }
